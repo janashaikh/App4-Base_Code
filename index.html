@@ -37,9 +37,27 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 </head> 
 
 <script>
-
+//adding java for question responses 
+    var wellrested_count = 0; //probability of sleeping enough being zero 
+    var sleepless_count = 0; //probability of not sleeping enough is zero 
+    var total_questions = 4; // Update this based on the total number of questions
 	//YOUR JAVASCRIPT GOES HERE
+function wellrestedAdd() {
+        wellrested_count += 1; //adding them to equal the well rested into one, increments by 1
+    }
 
+    function sleeplessAdd() {
+        sleepless_count += 1; //adding them to equal the sleeplessness into one, increments by 1
+    }
+
+    function calculateResults() { //functions to caculate and display based on user response, want it to be out of 100 (percent)
+        var wellrestedPercent = (wellrested_count / total_questions) * 100;
+        var sleeplessPercent = (sleepless_count / total_questions) * 100;
+
+        var resultText = document.getElementById("results"); // Selects with the ID "results" to display the probability results
+        resultText.innerHTML = "Probability it is allergies: " + allergyPercent.toFixed(1) + "%<br> Probability it is a cold: " + coldPercent.toFixed(1) + "%";
+    } // Updates with the probabilities 
+// for sleeping enough to make sure it is a percentage out of 100
 </script>	
 
 
@@ -69,7 +87,87 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 <body>
 	
 	<!-- HERE IS WHERE ALL OF YOUR HTML PAGES GO -->
-	REPLACE THIS TEXT
+<body> 
+	 <!-- starting the first page (after the introduction) and first question -->
+	<div class="page" id="one">
+    <p>Do you get at least 7-9 hours of sleep most nights?</p>
+		        <!-- yes indicates enough sleep and then it moves onto the next question -->
+    <a href="#two" onclick="wellrestedAdd();" class="w3-btn w3-black">Yes</a>
+    <a href="#two" onclick="sleeplessAdd();" class="w3-btn w3-black">No</a>  <!-- no increases sleeplessness chance and moves to next question -->
+</div>
+  <!-- third page, second question -->
+<div class="page" id="two"> <!-- page for two -->
+    <p>Do you feel refreshed when you wake up?</p>
+    <a href="#three" onclick="wellrestedAdd();" class="w3-btn w3-black">Yes</a>
+    <a href="#three" onclick="sleeplessAdd();" class="w3-btn w3-black">No</a>
+	<!-- yes indicates enough sleep and then it moves onto the next question, no increases sleeplessness chance and moves to next question -->
+</div>
+<!-- fourth page, third question -->
+<div class="page" id="three"> <!-- page for three -->
+    <p>o you have trouble staying asleep?</p>
+    <a href="#four" onclick="sleeplessAdd();" class="w3-btn w3-black">Yes</a>
+    <a href="#four" onclick="wellrestedAdd();" class="w3-btn w3-black">No</a>
+	<!-- yes indicates not enough sleep and then it moves onto the next question, no increases well rested chance and moves to next question -->
+</div>
+<!-- fifth page, fourth question -->
+<div class="page" id="four"> <!-- page for four -->
+    <p>Do you struggle to concentrate or remember things?</p>
+    <a href="#resultsPage" onclick="sleeplessAdd();" class="w3-btn w3-black">Yes</a>
+    <a href="#resultsPage" onclick="wellrestedAdd();" class="w3-btn w3-black">No</a>
+	<!-- yes indicates not enough sleep and then it moves onto the next question, no increases well rested chance and moves to next question -->
+</div>
+
+<!-- Results Page, shows the final score and you have the option to start over -->
+<div class="page" id="resultsPage">
+    <p id="results"></p>         <!-- where the calculated results will be displayed -->
+    <button onclick="calculateResults();" class="w3-btn w3-green">Show Results</button>
+</div>
+
+<div id="header" class="w3-container w3-flat-carrot">
+	<h1>Cold or Allergies?</h1>
+</div>
+	<!-- This is the introductory page where users start the quiz -->
+<div id="content" class="w3-container">
+	<p>Are you feeling like you're not getting enough sleep but are unsure? Answer a few short questions to find out!</p> <!-- introduction-->
+	
+	<a href="#one" class="w3-btn w3-grey w3-round"> Get Started </a>
+	
+	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
+ 	<!-- This is a warning that it is just for the DIY stream -->
+	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
+
+<div class="page" id="one">
+	<div id="header" class="w3-container w3-flat-carrot">
+		<h1>Question 1</h1>
+	</div>
+	
+    	<div id="content" class="w3-container">
+        <p>Put Question 1 content here.</p>    
+    	</div>
+</div>
+
+<div class="page" id="two">
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 2</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Content of page 2 goes here.</p>
+	</div>
+	<div class="page" id="resultsPage">
+    <div class="w3-container w3-flat-carrot">
+        <h1>Results</h1>
+    </div>
+
+    <div class="w3-container">
+        <p id="results"></p>
+       <button onclick="calculateResults();" class="w3-btn w3-green">Show Results</button>
+      </div>
+		
+<footer class="w3-bottom w3-container w3-flat-carrot">
+	<p>DIY!</p>
+</footer>
+
 	
 </body>
 </html>
